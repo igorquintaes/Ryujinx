@@ -13,13 +13,21 @@ namespace Ryujinx.HLE.HOS.Services.Friend
         {
             _commands = new Dictionary<int, ServiceProcessRequest>
             {
-                { 0, CreateFriendService }
+                { 0, CreateFriendService },
+                { 1, CreateNotificationService }
             };
         }
 
         public static long CreateFriendService(ServiceCtx context)
         {
             MakeObject(context, new IFriendService());
+
+            return 0;
+        }
+
+        public static long CreateNotificationService(ServiceCtx context)
+        {
+            MakeObject(context, new INotificationService());
 
             return 0;
         }
