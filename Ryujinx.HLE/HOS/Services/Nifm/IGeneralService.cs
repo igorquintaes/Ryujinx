@@ -21,8 +21,9 @@ namespace Ryujinx.HLE.HOS.Services.Nifm
         {
             _commands = new Dictionary<int, ServiceProcessRequest>
             {
-                { 4, CreateRequest        },
-                { 12, GetCurrentIpAddress }
+                { 4, CreateRequest                 },
+                { 12, GetCurrentIpAddress          },
+                { 21, IsAnyInternetRequestAccepted }
             };
         }
 
@@ -51,6 +52,16 @@ namespace Ryujinx.HLE.HOS.Services.Nifm
             context.ResponseData.Write(BitConverter.ToUInt32(address.GetAddressBytes()));
 
             Logger.PrintInfo(LogClass.ServiceNifm, $"Console's local IP is \"{address}\".");
+
+            return 0;
+        }
+
+        public long IsAnyInternetRequestAccepted(ServiceCtx context)
+        {
+            const bool isAny = false;
+
+            context.ResponseData.Write(isAny);
+            Logger.PrintStub(LogClass.ServiceNifm, new { isAny });
 
             return 0;
         }
