@@ -21,9 +21,20 @@ namespace Ryujinx.HLE.HOS.Services.Nifm
         {
             _commands = new Dictionary<int, ServiceProcessRequest>
             {
+                { 1, GetClientId          },
                 { 4, CreateRequest        },
                 { 12, GetCurrentIpAddress }
             };
+        }
+
+        public long GetClientId(ServiceCtx context)
+        {
+            const ulong clientId = 1;
+            context.ResponseData.Write(clientId);
+
+            Logger.PrintStub(LogClass.ServiceNifm, new { clientId });
+
+            return 0;
         }
 
         public long CreateRequest(ServiceCtx context)
