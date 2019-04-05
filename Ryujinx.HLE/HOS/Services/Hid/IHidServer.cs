@@ -145,6 +145,7 @@ namespace Ryujinx.HLE.HOS.Services.Hid
                 { 511,  WritePalmaApplicationSection                  },
                 { 512,  ReadPalmaUniqueCode                           },
                 { 513,  SetPalmaUniqueCodeInvalid                     },
+                { 525,  SetPalmaBoostMode                             },
                 { 1000, SetNpadCommunicationMode                      },
                 { 1001, GetNpadCommunicationMode                      }
             };
@@ -1433,6 +1434,16 @@ namespace Ryujinx.HLE.HOS.Services.Hid
             int palmaConnectionHandle = context.RequestData.ReadInt32();
 
             Logger.PrintStub(LogClass.ServiceHid, new { palmaConnectionHandle });
+
+            return 0;
+        }
+
+        //  SetPalmaBoostMode(bool IsBoostMode)
+        public long SetPalmaBoostMode(ServiceCtx context)
+        {
+            bool palmaBoostMode = context.RequestData.ReadBoolean();
+
+            Logger.PrintStub(LogClass.ServiceHid, new { palmaBoostMode, _npadCommunicationMode });
 
             return 0;
         }
